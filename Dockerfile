@@ -59,8 +59,8 @@ RUN \
     apt-get -y clean && \
     apt-get -y autoclean && \
     apt-get -y autoremove && \
+    apt-get purge -y $(apt-cache search '~c' | awk '{ print $2 }') && \
     rm -rf /var/lib/apt/lists/* && \
-    rm -rf /var/lib/dpkg/info/* && \
     rm -rf /var/cache/apt && \
     rm -rf /var/cache/oracle-jdk8-installer && \
     rm -rf /tmp/*
