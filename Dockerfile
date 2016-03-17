@@ -15,12 +15,14 @@ ENV JAVA_HOME /usr/lib/jvm/java-8-oracle
 RUN \
   sed -i 's/# \(.*multiverse$\)/\1/g' /etc/apt/sources.list && \
   apt-get -y update && \
-  apt-get -y upgrade && \
   apt-get -y install software-properties-common && \
+  add-apt-repository -y ppa:git-core/ppa && \
+  apt-get -y update && \
   apt-get -y install curl wget unzip nano git && \
   echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | debconf-set-selections && \
   add-apt-repository -y ppa:webupd8team/java && \
   apt-get -y update && \
+  apt-get -y upgrade && \
   apt-get -y install oracle-java8-installer && \
   apt-get -y install oracle-java8-set-default && \
   rm -rf $JAVA_HOME/lib/missioncontrol \
