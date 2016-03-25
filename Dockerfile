@@ -1,4 +1,4 @@
-FROM library/ubuntu:14.04.4
+FROM library/ubuntu:14.04
 MAINTAINER Rodrigo Fernandes <rodrigo.fernandes@tecnico.ulisboa.pt>
 
 #
@@ -24,6 +24,7 @@ RUN \
   apt-get -y update && \
   apt-get -y upgrade && \
   apt-get -y install oracle-java8-installer && \
+  apt-get -y install oracle-java8-unlimited-jce-policy && \
   apt-get -y install oracle-java8-set-default && \
   rm -rf $JAVA_HOME/lib/missioncontrol \
         $JAVA_HOME/lib/visualvm \
