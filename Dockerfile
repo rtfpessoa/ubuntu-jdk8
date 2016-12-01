@@ -5,10 +5,12 @@ MAINTAINER Rodrigo Fernandes <rodrigo.fernandes@tecnico.ulisboa.pt>
 # Ubuntu with Oracle JDK 8
 #
 
-RUN locale-gen en_US en_US.UTF-8
+RUN locale-gen en_US.UTF-8
+
 ENV LANG en_US.UTF-8
-ENV LANGUAGE en_US:en
+ENV LANGUAGE en_US.UTF-8
 ENV LC_ALL en_US.UTF-8
+
 ENV JAVA_HOME /usr/lib/jvm/java-8-oracle
 
 # Install and setup project dependencies
@@ -17,12 +19,11 @@ RUN \
   apt-get -y update && \
   apt-get -y install software-properties-common && \
   add-apt-repository -y ppa:git-core/ppa && \
-  apt-get -y update && \
-  apt-get -y install curl wget unzip nano git && \
   echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | debconf-set-selections && \
   add-apt-repository -y ppa:webupd8team/java && \
   apt-get -y update && \
   apt-get -y upgrade && \
+  apt-get -y install curl wget unzip nano git && \
   apt-get -y install oracle-java8-installer && \
   apt-get -y install oracle-java8-unlimited-jce-policy && \
   apt-get -y install oracle-java8-set-default && \
