@@ -21,7 +21,8 @@ RUN \
   add-apt-repository -y ppa:git-core/ppa && \
   apt-get -y update && \
   apt-get -y upgrade && \
-  apt-get -y install curl wget unzip nano git && \
+  apt-get -y install curl wget unzip nano && \
+  apt-get -y install git=1:2.17.* && \
   apt-get -y install oracle-java8-installer && \
   apt-get -y install oracle-java8-unlimited-jce-policy && \
   apt-get -y install oracle-java8-set-default && \
