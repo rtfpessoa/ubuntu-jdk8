@@ -1,4 +1,4 @@
-FROM library/ubuntu:14.04
+FROM library/ubuntu:16.04
 MAINTAINER Rodrigo Fernandes <rodrigo.fernandes@tecnico.ulisboa.pt>
 
 #
