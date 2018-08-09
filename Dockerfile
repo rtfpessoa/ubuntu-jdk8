@@ -5,6 +5,19 @@ MAINTAINER Rodrigo Fernandes <rodrigo.fernandes@tecnico.ulisboa.pt>
 # Ubuntu with Oracle JDK 8
 #
 
+RUN \
+  apt-get -y update && \
+  apt-get -y install software-properties-common && \
+  apt-get -y install --reinstall locales && \
+  rm -rf /root/.cache && \
+  apt-get purge -y $(apt-cache search '~c' | awk '{ print $2 }') && \
+  apt-get -y autoremove && \
+  apt-get -y autoclean && \
+  apt-get -y clean all && \
+  rm -rf /var/lib/apt/lists/* && \
+  rm -rf /var/cache/apt && \
+  rm -rf /tmp/*
+
 RUN locale-gen en_US.UTF-8
 
 ENV LANG en_US.UTF-8
@@ -16,13 +29,14 @@ ENV JAVA_HOME /usr/lib/jvm/java-8-oracle
 RUN \
   apt-get -y update && \
   apt-get -y install software-properties-common && \
+  apt-get -y install --reinstall locales && \
   echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | debconf-set-selections && \
   add-apt-repository -y ppa:webupd8team/java && \
   add-apt-repository -y ppa:git-core/ppa && \
   apt-get -y update && \
   apt-get -y upgrade && \
   apt-get -y install curl wget unzip nano && \
-  apt-get -y install git=1:2.17.* && \
+  apt-get -y install git=1:2.18.* && \
   apt-get -y install oracle-java8-installer && \
   apt-get -y install oracle-java8-unlimited-jce-policy && \
   apt-get -y install oracle-java8-set-default && \
@@ -101,7 +115,7 @@ RUN \
         apt-get -y autoremove && \
         apt-get -y autoclean && \
         apt-get -y clean all && \
-        sudo rm -rf /var/lib/apt/lists/* && \
-        sudo rm -rf /var/cache/apt && \
-        sudo rm -rf /var/cache/oracle-jdk8-installer && \
-        sudo rm -rf /tmp/*
+        rm -rf /var/lib/apt/lists/* && \
+        rm -rf /var/cache/apt && \
+        rm -rf /var/cache/oracle-jdk8-installer && \
+        rm -rf /tmp/*
