@@ -1,8 +1,9 @@
-FROM library/ubuntu:16.04
-MAINTAINER Rodrigo Fernandes <rodrigo.fernandes@tecnico.ulisboa.pt>
+FROM library/ubuntu:18.04
+
+LABEL maintainer="Rodrigo Fernandes <rodrigo.fernandes@tecnico.ulisboa.pt>"
 
 #
-# Ubuntu with Oracle JDK 8
+# Ubuntu 18.04.x with Oracle JDK 8
 #
 
 RUN \
@@ -35,7 +36,7 @@ RUN \
   add-apt-repository -y ppa:git-core/ppa && \
   apt-get -y update && \
   apt-get -y upgrade && \
-  apt-get -y install curl wget unzip nano && \
+  apt-get -y install curl wget unzip vim && \
   apt-get -y install git=1:2.20.* && \
   apt-get -y install oracle-java8-installer && \
   apt-get -y install oracle-java8-unlimited-jce-policy && \

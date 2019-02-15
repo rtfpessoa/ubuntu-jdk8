@@ -1,0 +1,27 @@
+version: 2
+jobs:
+  build-and-publish:
+    machine: true
+    working_directory: ~/workdir
+    steps:
+      - checkout
+      - run:
+          name: Build
+          command: docker build -t $CIRCLE_PROJECT_REPONAME --no-cache .
+      - run:
+          name: Publish
+          command: |
+            docker login -u $DOCKER_USER -p $DOCKER_PASS
+            docker tag $CIRCLE_PROJECT_REPONAME $CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME
+            docker tag $CIRCLE_PROJECT_REPONAME $CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME:$DOCKER_VERSION_MAJOR.$DOCKER_VERSION_MINOR.$CIRCLE_BUILD_NUM
+            docker push $CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME
+
+workflows:
+  version: 2
+  build-and-publish:
+    jobs:
+      - build-and-publish:
+          filters:
+            branches:
+              only:
+                - master
